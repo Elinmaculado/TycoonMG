@@ -6,8 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
 
     //Variables publicas
-    public float walkSpeed, runSpeed;
+    public float walkSpeed, runSpeed, rotationSpeed;
     public bool canMove;
+    public Transform CameraAim;
+
+
     //Variables privadas
     private Vector3 vectorMovement;
     private float speed;
@@ -27,9 +30,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if(canMove)
         { 
-        Walk();
-        Run();
+            Walk();
+            Run();
+            AlignPlayer();
         }
+        Gravity();
     }
 
     void Walk()
@@ -40,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
 
         //normalizamos el vector de movimiento
         vectorMovement = vectorMovement.normalized;
+
+        //Nos movemos en direccion a la camara
+        vectorMovement = CameraAim.TransformDirection(vectorMovement);
 
         //Movemos al player
         characterController.Move(vectorMovement * speed * Time.deltaTime);
@@ -62,5 +70,13 @@ public class PlayerMovement : MonoBehaviour
     void Gravity()
     {
         characterController.Move(new Vector3(0f, -4f * Time.deltaTime, 0f));
+    }
+
+    void AlignPlayer()
+    {
+        if(characterController.velocity.magnitude > 0f) 
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vectorMovement), rotationSpeed * Time.deltaTime);
+        }
     }
 }
