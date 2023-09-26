@@ -15,6 +15,7 @@ public class ResourceDetector : MonoBehaviour
         if(other.gameObject.GetComponent<Resources>())
         {
             resourceManager.AddResources(other.gameObject.GetComponent<Resources>().value);
+            Destroy(other.gameObject);
         }
     }
 }
