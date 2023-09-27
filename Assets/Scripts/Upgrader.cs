@@ -8,7 +8,7 @@ public class Upgrader : MonoBehaviour
 {
     public ResourceManager resourceManager;
     public float cost;
-    public float text;
+    public string text;
 
     public UnityEvent EventoCanonico;
 
