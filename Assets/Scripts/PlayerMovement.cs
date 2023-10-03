@@ -6,15 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
 
     //Variables publicas
-    public float walkSpeed, runSpeed, rotationSpeed;
+    public float walkSpeed, runSpeed, jumpForce, rotationSpeed;
     public bool canMove;
     public Transform CameraAim;
+    public GroundDetector groundDetector;
 
 
     //Variables privadas
     private Vector3 vectorMovement;
+    private Vector3 verticalForce;
     private float speed;
     private CharacterController characterController;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -22,19 +25,22 @@ public class PlayerMovement : MonoBehaviour
         //inicializacion de variables
         characterController = GetComponent<CharacterController>();
         speed = walkSpeed;
+        verticalForce = Vector3.zero;
         vectorMovement = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canMove)
-        { 
+        if (canMove)
+        {
             Walk();
             Run();
             AlignPlayer();
+            Jump();
         }
         Gravity();
+        checkGround();
     }
 
     void Walk()
@@ -56,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     void Run()
     {
         //si presionamos left alt modificamos la velovidad
-        if(Input.GetAxis("Run") > 0)
+        if (Input.GetAxis("Run") > 0)
         {
             speed = runSpeed;
         }
@@ -64,19 +70,43 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = walkSpeed;
         }
-            
+
     }
 
     void Gravity()
     {
-        characterController.Move(new Vector3(0f, -4f * Time.deltaTime, 0f));
+        if (!isGrounded) 
+        {
+            verticalForce += Physics.gravity * Time.deltaTime;
+        }
+        else
+        {
+            verticalForce = new Vector3(0f, -2, 0f);
+        }
+        characterController.Move(verticalForce * Time.deltaTime);
     }
 
     void AlignPlayer()
     {
-        if(characterController.velocity.magnitude > 0f) 
+        if (characterController.velocity.magnitude > 0f)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vectorMovement), rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    void checkGround()
+    {
+        isGrounded = groundDetector.GetIsGrounded();
+
+    }
+
+    void Jump()
+    {
+        if (isGrounded && Input.GetAxis("Jump") > 0f)
+        {
+            verticalForce = new Vector3(0f, jumpForce, 0f);
+            isGrounded = false;
+            //Debug.Log("sientra");
         }
     }
 }
