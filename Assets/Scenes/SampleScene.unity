@@ -762,8 +762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.5, y: 0.7, z: 0}
+  Damping: {x: 0.5, y: 0.5, z: 0.5}
+  ShoulderOffset: {x: 0, y: 0.7, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 3.5
@@ -1097,6 +1097,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &923700595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 659216997587833575, guid: ad94ee8ff246f38478d6ad0c860adc4f, type: 3}
+  m_PrefabInstance: {fileID: 659216998067793594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e2e026c6670154db6d1703894008a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &937840570 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2014574601043240235, guid: bd6fbee391a736a4caa88caae2b75214, type: 3}
@@ -1194,8 +1205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1498677, y: -0.07008435, z: 0.010650771, w: 0.9861615}
-  m_LocalPosition: {x: 0.79672694, y: 1.9869267, z: -4.5414023}
+  m_LocalRotation: {x: 0.15166786, y: 0, z: 0, w: 0.9884315}
+  m_LocalPosition: {x: 0.2967269, y: 1.9869267, z: -4.5414023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2309,8 +2320,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095385619}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1498677, y: -0.07008435, z: 0.010650771, w: 0.9861615}
-  m_LocalPosition: {x: 0.79672694, y: 1.9869267, z: -4.5414023}
+  m_LocalRotation: {x: 0.15166786, y: 0, z: 0, w: 0.9884315}
+  m_LocalPosition: {x: 0.2967269, y: 1.9869267, z: -4.5414023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2729,6 +2740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652633882242}
   - component: {fileID: 5866666020811277560}
+  - component: {fileID: 5866666020811277561}
   m_Layer: 0
   m_Name: Player model
   m_TagString: Untagged
@@ -4148,6 +4160,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020811277561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148106134584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ccf7cd024aa5e44bac90b70d7900f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 923700595}
+  groundDetector: {fileID: 981246889}
 --- !u!4 &5901452234162916353
 Transform:
   m_ObjectHideFlags: 0

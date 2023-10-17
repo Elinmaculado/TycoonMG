@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Variables privadas
     private Vector3 vectorMovement;
+    private float currentSpeed;
     private Vector3 verticalForce;
     private float speed;
     private CharacterController characterController;
@@ -24,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //inicializacion de variables
         characterController = GetComponent<CharacterController>();
-        speed = walkSpeed;
+        speed = 0;
+        currentSpeed = 0;
         verticalForce = Vector3.zero;
         vectorMovement = Vector3.zero;
     }
@@ -54,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
 
         //Nos movemos en direccion a la camara
         vectorMovement = CameraAim.TransformDirection(vectorMovement);
+
+        //Guardamos la velocidad actual con suavizado
+        currentSpeed = Mathf.Lerp(currentSpeed, vectorMovement.magnitude * speed, 10f *Time.deltaTime);
 
         //Movemos al player
         characterController.Move(vectorMovement * speed * Time.deltaTime);
@@ -108,5 +113,10 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             //Debug.Log("sientra");
         }
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
     }
 }
