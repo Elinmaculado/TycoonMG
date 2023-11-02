@@ -6,25 +6,43 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Image BlackBG;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        StartCoroutine(fadeIn());
     }
 
     public void CargarEscena(int _scene)
     {
-        SceneManager.LoadScene(_scene);
+        StartCoroutine(fadeOut(_scene));
     }
 
     public void Salir()
     {
         Application.Quit();
+    }
+
+    IEnumerator fadeIn()
+    {
+        Color c = BlackBG.color;
+        for (float alpha = 1f; alpha >= 0f; alpha -= 2f*Time.deltaTime) 
+        {
+            c.a = alpha;
+            BlackBG.color = c;
+            yield return null;
+        }
+    }
+    IEnumerator fadeOut(int _scene)
+    {
+        Color c = BlackBG.color;
+        for (float alpha = 0f; alpha <= 1f; alpha += 2f*Time.deltaTime) 
+        {
+            c.a = alpha;
+            BlackBG.color = c;
+            yield return null;
+        }
+        //Cambio de escena
+        SceneManager.LoadScene(_scene);
     }
 }
