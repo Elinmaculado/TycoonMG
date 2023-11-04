@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf85b029e13be04195fdb792709bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 25
+  value: 5
 --- !u!1001 &9112000069220781757
 PrefabInstance:
   m_ObjectHideFlags: 0
